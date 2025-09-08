@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>과제1</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    font-family: "Nanum Pen Script", cursive, sans-serif;
+    color: #2f3640;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+.container {
+    background-image: url(img/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;  
+    background-position: center;
+    max-width: 1000px;
+    max-height: 1250px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 10px;
+    height: 1250px; /* 원하는 고정 높이 */
+}
+header {
+    background: transparent;
+    color: #000000;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo{
+    width: 100px;
+    height: 100px;
+}
+.logo2{
+    font-size: 30px;
+    margin-left:100px;
+}
+/* 가로 메뉴 */
+nav {
+    display: flex;
+    gap: 20px;
+}
+nav > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+nav > ul > li {
+    position: relative;
+}
+nav a {
+    color: #000000;
+    text-decoration: none;
+    padding: 8px 12px;
+    display: block;
+}
+header nav a:hover {
+    background-color: green;
+    border-radius: 6px;
+}
+/* 드롭다운 메뉴 */
+nav li ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    padding: 10px 0;
+    border-radius: 6px;
+    min-width: 120px;
+    z-index: 10;
+}
+nav li:hover ul {
+    display: block;
+    flex-direction: column;
+}
+nav li ul li {
+    padding: 0;
+}
+nav li ul li a {
+    padding: 8px 12px;
+    white-space: nowrap;
+}
+ul {
+    list-style: none; /* 동그라미 제거 */
+    padding-left: 0;  
+    margin: 0;
+}
+ul ul {
+    padding-left: 20px;
+}
+/* 메인 영역 */
+main {
+    display: flex;
+    flex: 1;
+    max-width: 1000px;
+    margin: 20px auto;
+    width: 100%;
+    gap: 20px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+nav.aside{
+    width: 25%;
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+}
+aside.aside1, aside.aside2{
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+    height: 220px;
+    width: 85%;
+}
+.art1{min-height: 1000px;}
+.asideimg1 {
+    position: sticky;
+    bottom: 5%;
+    left: 83%;
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    z-index: 1000;
+}
+aside h2 {
+    margin-top: 0;
+}
+aside input {
+    width: 100%;
+    padding: 8px 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+aside button {
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff4757;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+aside button:hover {
+    background-color: #e84118;
+}
+/* article */
+article {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 40%;
+}
+article #contentBox h2{
+    margin-top:0;
+}
+/* footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #001F3F;
+    color: #fff;
+    margin-top: auto;
+    border-radius: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<header>
+<img src="img/logo.png" class="logo" id="logo">
+<div class="logo2">서울시 음주군!</div>
+<nav>
+    <ul>
+        <li>
+            서대문구
+            <ul>
+                <li><a>최가상회</a></li>
+                <li><a>서대문 꼼장어</a></li>
+                <li><a>철길 떡볶이</a></li>
+            </ul>
+        </li>
+        <li>
+            중구
+            <ul>
+                <li><a href="#">중림동 물고기</a></li>
+                <li><a href="#">초류향</a></li>
+                <li><a href="#">태평성대</a></li>
+            </ul>
+        </li>
+        <li>
+            강북구
+            <ul>
+                <li><a href="#">조연탄</a></li>
+                <li><a href="#">준참치</a></li>
+                <li><a href="#">이빠이뼈다귀</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+</header>
+
+<main>
+<nav class="aside">
+<aside class="aside1" id="loginBox">
+  <h2>로그인</h2>
+  <input type="text" id="userid" placeholder="test">
+  <input type="password" id="userpw" placeholder="1234">
+  <button id="loginBtn">로그인</button>
+</aside>
+
+<aside class="aside2">
+    <h2>방명록</h2>
+    <ul>
+        <li class="li1">
+            <a href="#">호에에</a>
+        </li>
+    </ul>
+</aside>
+</nav>
+
+<article class="art1">
+    <!-- 내용만 바뀌는 영역 -->
+    <div id="contentBox">
+        <h2>머리말</h2>
+        <p>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+        </p>
+    </div>
+
+    <!-- 항상 유지되는 스티키 이미지 -->
+    <img src="img/05.png" class="asideimg1" id="myImg1">
+</article>
+</main>
+
+<footer>
+    © 2025 Copylight.Inc 
+    <audio id="bgMusic" loop>
+    <source src="music/Firefly.mp3" type="audio/mpeg">
+</audio>
+<button onclick="document.getElementById('bgMusic').play()">재생</button>
+<button onclick="document.getElementById('bgMusic').pause()">정지</button>
+<script>
+// bgMusic 객체
+const bgMusic = {
+    audio: document.getElementById('bgMusic'),
+    play() {
+        this.audio.play().catch(err => console.log('자동 재생 막힘:', err));
+    },
+    pause() {
+        this.audio.pause();
+    },
+    toggle() {
+        if(this.audio.paused) {
+            this.play();
+        } else {
+            this.pause();
+        }
+    },
+    setVolume(value) {
+        // value: 0 ~ 1
+        this.audio.volume = value;}
+    };
+</script>
+</footer>
+<script>
+// 로그인 스크립트
+function showLoginBox() {
+    const loginBox = document.getElementById("loginBox");
+    const loggedUser = localStorage.getItem("loggedUser");
+    if (loggedUser) {
+        loginBox.innerHTML = `
+            <h2>로그인 성공!</h2>
+            <p>환영합니다, ${loggedUser}님</p>
+            <p>⊂ヽ(^ω^)つ^ω^)つ</p>
+            <button id="logoutBtn">로그아웃</button>
+        `;
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            localStorage.removeItem("loggedUser");
+            showLoginBox();
+        });
+    } else {
+        loginBox.innerHTML = `
+            <h2>로그인</h2>
+            <input type="text" id="userid" placeholder="test">
+            <input type="password" id="userpw" placeholder="1234">
+            <button id="loginBtn">로그인</button>
+        `;
+        document.getElementById("loginBtn").addEventListener("click", () => {
+            const userid = document.getElementById("userid").value;
+            const userpw = document.getElementById("userpw").value;
+            if (userid === "test" && userpw === "1234") {
+                localStorage.setItem("loggedUser", userid);
+                showLoginBox();
+            } else {
+                alert("아이디 또는 비밀번호가 틀렸습니다.");
+            }
+        });}
+    }
+showLoginBox();
+const logo = document.getElementById('logo');
+logo.addEventListener('click', () => {
+    contentBox.innerHTML = `
+        <h2>머리말</h2>
+        <p>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+            아옿옿옿옿옿옿옿옿옿옿옿<br>
+        </p>
+    `;
+});
+const contentBox = document.getElementById('contentBox');
+const menuContent = {
+    "최가상회": 
+    `<h2>최가상회</h2>
+    <p>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+        서대문구의 대표 상점, 최가상회입니다.<br>
+    </p>`,
+    "서대문 꼼장어": 
+    `<h2>서대문 꼼장어</h2>
+    <p>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+        맛있는 꼼장어를 즐길 수 있는 곳!<br>
+    </p>`,
+    "철길 떡볶이": `<h2>철길 떡볶이</h2><p>철길 떡볶이의 매콤한 맛.</p>`,
+    "중림동 물고기": `<h2>중림동 물고기</h2><p>신선한 해산물을 즐길 수 있습니다.</p>`,
+    "초류향": `<h2>초류향</h2><p>중구의 인기 중국 음식점.</p>`,
+    "태평성대": `<h2>태평성대</h2><p>중구의 전통 맛집.</p>`,
+    "조연탄": `<h2>조연탄</h2><p>강북구의 대표 고깃집.</p>`,
+    "준참치": `<h2>준참치</h2><p>신선한 참치 요리.</p>`,
+    "이빠이뼈다귀": `<h2>이빠이뼈다귀</h2><p>뼈다귀 해장국이 유명합니다.</p>`
+};
+const menuLinks = document.querySelectorAll('nav > ul > li ul li a');
+menuLinks.forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const menuName = link.textContent.trim();
+        if(menuContent[menuName]){
+            contentBox.innerHTML = menuContent[menuName];
+        }
+    });
+});
+const img1 = document.getElementById('myImg1');
+img1.addEventListener('mouseenter', () => { img1.src = 'img/06.png'; });
+img1.addEventListener('mouseleave', () => { img1.src = 'img/05.png'; });
+</script>
+</body>
+</html>
