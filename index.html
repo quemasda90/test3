@@ -14,6 +14,12 @@ body {
     flex-direction: column;
     font-size: 20px;
 }
+ #calendar { display: inline-block; }
+  table { border-collapse: collapse; }
+  th, td { width: 40px; height: 20px; 
+    text-align: center; border: 1px solid #ccc; }
+  th { background: #eee; }
+  .today { background: yellow; }
 .container {
     background-image: url(img/background.png);
     background-repeat: no-repeat;
@@ -38,9 +44,10 @@ header {
     width: 100px;
     height: 100px;
 }
-.logo2{
-    font-size: 30px;
-    margin-left:100px;
+
+.logo3{
+    width: 200px;
+    height: 200px;
 }
 /* 가로 메뉴 */
 nav {
@@ -115,25 +122,31 @@ nav.aside{
     flex-direction: column; 
     gap: 20px;
 }
-aside.aside1, aside.aside2{
+aside.aside1, aside.aside2, aside.aside3{
     position: relative;
     background-color: #fff;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     flex-shrink: 0;
-    height: 220px;
+    height: auto ;
     width: 85%;
 }
 .art1{min-height: 1000px;}
 .asideimg1 {
     position: sticky;
-    bottom: 5%;
-    left: 83%;
-    width: 70px;
-    height: 70px;
-    object-fit: contain;
-    z-index: 1000;
+    bottom: 30px;
+    float: right;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.asideimg1:hover {
+    transform: scale(1.2) rotate(10deg);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
 aside h2 {
     margin-top: 0;
@@ -147,7 +160,7 @@ aside input {
     box-sizing: border-box;
 }
 aside button {
-    width: 100%;
+    width: 50%;
     padding: 8px 0;
     border: none;
     border-radius: 6px;
@@ -156,9 +169,46 @@ aside button {
     font-weight: bold;
     cursor: pointer;
 }
+/* 기존 aside button 스타일은 유지하거나 조정 */
+/* .aside1 button { width: 50%; ... } */
+
+.button-group {
+    display: flex; /* Flexbox를 사용하여 버튼들을 나란히 배치 */
+    gap: 10px; /* 버튼 사이 간격 */
+    margin-top: 10px; /* 입력 필드와의 간격 */
+}
+
+.button-group button {
+    width: 50%; /* 각 버튼이 50% 너비를 차지 */
+    padding: 8px 0;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff4757;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    /* float 제거 */
+}
+
+.button-group button:hover {
+    background-color: #e84118;
+}
+
+/* 회원가입 버튼에만 다른 스타일을 적용하고 싶다면 */
+.signup-btn {
+    background-color: #2f3640; /* 다른 색상 예시 */
+}
+.signup-btn:hover {
+    background-color: #485460;
+}
 aside button:hover {
     background-color: #e84118;
 }
+  #calculator { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+  
+  button.aside2 { width: 35px; height: 35px; margin: 5px; border: none; border-radius: 5px; background: #eee; cursor: pointer; }
+  button.operator { background: #f9a825; color: #fff; }
+  button.clear { background: #e53935; color: #fff; margin-top:5px;}
 /* article */
 article {
     flex: 1;
@@ -180,6 +230,26 @@ footer {
     margin-top: auto;
     border-radius: 10px;
 }
+.music-controls {
+    margin-top: 15px;
+}
+
+.music-controls button {
+    margin: 0 8px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.music-controls button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
 </style>
 </head>
 <body>
@@ -187,7 +257,7 @@ footer {
 <div class="container">
 <header>
 <img src="img/logo.png" class="logo" id="logo">
-<div class="logo2">서울시 음주군!</div>
+<div ><img src="img/logo2.png" class="logo3"></div>
 <nav>
     <ul>
         <li>
@@ -211,7 +281,7 @@ footer {
             <ul>
                 <li><a href="#">조연탄</a></li>
                 <li><a href="#">준참치</a></li>
-                <li><a href="#">이빠이뼈다귀</a></li>
+                <li><a href="index.html">이빠이뼈다귀</a></li>
             </ul>
         </li>
     </ul>
@@ -221,19 +291,162 @@ footer {
 <main>
 <nav class="aside">
 <aside class="aside1" id="loginBox">
-  <h2>로그인</h2>
-  <input type="text" id="userid" placeholder="test">
-  <input type="password" id="userpw" placeholder="1234">
-  <button id="loginBtn">로그인</button>
+  <!-- 내용은 JS에서 showLoginBox()가 처리 -->
 </aside>
 
+<script>
+function showLoginBox() {
+    const loginBox = document.getElementById("loginBox");
+    const loggedUser = localStorage.getItem("loggedUser");
+
+    if (loggedUser) {
+        loginBox.innerHTML = `
+            <h2>로그인 성공!</h2>
+            <p>환영합니다, ${loggedUser}님</p>
+            <p>⊂ヽ(^ω^)つ^ω^)つ</p>
+            <button id="logoutBtn">로그아웃</button>
+        `;
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            localStorage.removeItem("loggedUser");
+            showLoginBox();
+        });
+    } else {
+        loginBox.innerHTML = `
+            <h2>로그인</h2>
+            <input type="text" id="userid" placeholder="test">
+            <input type="password" id="userpw" placeholder="1234">
+            <div class="button-group">
+                <button id="loginBtn">로그인</button>
+                <button id="signupBtn">회원가입</button>
+            </div>
+        `;
+
+        // 로그인 버튼 이벤트
+        document.getElementById("loginBtn").addEventListener("click", () => {
+            const userid = document.getElementById("userid").value;
+            const userpw = document.getElementById("userpw").value;
+            if (userid === "test" && userpw === "1234") {
+                localStorage.setItem("loggedUser", userid);
+                showLoginBox();
+            } else {
+                alert("아이디 또는 비밀번호가 틀렸습니다.");
+            }
+        });
+
+        document.getElementById("signupBtn").addEventListener("click", () => {
+            alert("회원가입 화면으로 이동합니다!");
+        });signupBtn.addEventListener("click", function() {
+    window.location.href = "blank.html";
+  });
+    }
+}
+
+// 초기 호출
+showLoginBox();
+</script>
 <aside class="aside2">
-    <h2>방명록</h2>
-    <ul>
-        <li class="li1">
-            <a href="#">호에에</a>
-        </li>
-    </ul>
+    <h2>달력</h2>
+    <h3 id="monthYear"></h3>
+  <div id="calendar"></div>
+<script>
+  const monthYear = document.getElementById("monthYear");
+  const calendar = document.getElementById("calendar");
+  let viewDate = new Date();
+
+ function renderCalendar(date){
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  monthYear.textContent = `${year}년 ${month+1}월`;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const lastDate = new Date(year, month+1, 0).getDate();
+
+  let html = "<table><thead><tr>";
+  const week = ["일","월","화","수","목","금","토"];
+  week.forEach(d => html += `<th>${d}</th>`);
+  html += "</tr></thead><tbody><tr>";
+
+  // 총 42칸 루프 돌기
+  let day = 1;
+  for(let i=0; i<42; i++){
+    if(i < firstDay || day > lastDate){
+      html += "<td></td>"; // 빈칸
+    } else {
+      const today = new Date();
+      const isToday = day===today.getDate() && month===today.getMonth() && year===today.getFullYear();
+      html += `<td class='${isToday?"today":""}'>${day}</td>`;
+      day++;
+    }
+
+    // 7칸마다 줄바꿈
+    if((i+1)%7===0 && i!==41) html += "</tr><tr>";
+  }
+
+  html += "</tr></tbody></table>";
+  calendar.innerHTML = html;
+}
+  function changeMonth(step){
+    viewDate.setMonth(viewDate.getMonth() + step);
+    renderCalendar(viewDate);
+  }
+
+  renderCalendar(viewDate);
+</script>
+</aside>
+<aside>
+   
+<div id="calculator">
+     <h2>계산기</h2>
+  <input type="text" id="display" disabled>
+  <div>
+    <button class="aside2" onclick="appendNumber('7')">7</button>
+    <button class="aside2" onclick="appendNumber('8')">8</button>
+    <button class="aside2" onclick="appendNumber('9')">9</button>
+    <button class="operator aside2" onclick="appendOperator('/')">÷</button>
+  </div>
+  <div>
+    <button class="aside2" onclick="appendNumber('4')">4</button>
+    <button class="aside2" onclick="appendNumber('5')">5</button>
+    <button class="aside2" onclick="appendNumber('6')">6</button>
+    <button class="operator aside2" onclick="appendOperator('*')">×</button>
+  </div>
+  <div>
+    <button class="aside2" onclick="appendNumber('1')">1</button>
+    <button class="aside2" onclick="appendNumber('2')">2</button>
+    <button class="aside2" onclick="appendNumber('3')">3</button>
+    <button class="operator aside2" onclick="appendOperator('-')">−</button>
+  </div>
+  <div>
+    <button class="aside2" onclick="appendNumber('0')">0</button>
+    <button class="aside2" onclick="appendNumber('.')">.</button>
+    <button class="operator aside2" onclick="appendOperator('+')">+</button>
+    <button class="operator aside2" onclick="calculate()">=</button>
+    
+  </div>
+  <div>
+    <button class="clear" onclick="clearDisplay()">C</button>
+  </div>
+</div>
+
+<script>
+  let display = document.getElementById('display');
+  function appendNumber(num) {
+    display.value += num;
+  }
+  function appendOperator(op) {
+    display.value += op;
+  }
+  function clearDisplay() {
+    display.value = '';
+  }
+  function calculate() {
+    try {
+      display.value = eval(display.value);
+    } catch {
+      display.value = 'Error';
+    }
+  }
+</script>
 </aside>
 </nav>
 
@@ -286,69 +499,35 @@ footer {
 
 <footer>
     © 2025 Copylight.Inc 
-    <audio id="bgMusic" loop>
-    <source src="music/Firefly.mp3" type="audio/mpeg">
-</audio>
-<button onclick="document.getElementById('bgMusic').play()">재생</button>
-<button onclick="document.getElementById('bgMusic').pause()">정지</button>
+    <div class="music-controls">
+        <audio id="bgMusic" loop>
+            <source src="music/Firefly.mp3" type="audio/mpeg">
+        </audio>
+        <button onclick="toggleMusic()">🎵 음악 재생/정지</button>
+        <button onclick="setVolume(0.3)">🔉 작게</button>
+        <button onclick="setVolume(0.7)">🔊 크게</button>
+    </div>
 <script>
-// bgMusic 객체
-const bgMusic = {
-    audio: document.getElementById('bgMusic'),
-    play() {
-        this.audio.play().catch(err => console.log('자동 재생 막힘:', err));
-    },
-    pause() {
-        this.audio.pause();
-    },
-    toggle() {
-        if(this.audio.paused) {
-            this.play();
-        } else {
-            this.pause();
-        }
-    },
-    setVolume(value) {
-        // value: 0 ~ 1
-        this.audio.volume = value;}
-    };
+// 음악 제어 개선
+const bgMusic = document.getElementById('bgMusic');
+let isPlaying = false;
+
+function toggleMusic() {
+    if (isPlaying) {
+        bgMusic.pause();
+        isPlaying = false;
+    } else {
+        bgMusic.play().catch(e => console.log('자동재생 차단됨'));
+        isPlaying = true;
+    }
+}
+
+function setVolume(vol) {
+    bgMusic.volume = vol;
+}
 </script>
 </footer>
 <script>
-// 로그인 스크립트
-function showLoginBox() {
-    const loginBox = document.getElementById("loginBox");
-    const loggedUser = localStorage.getItem("loggedUser");
-    if (loggedUser) {
-        loginBox.innerHTML = `
-            <h2>로그인 성공!</h2>
-            <p>환영합니다, ${loggedUser}님</p>
-            <p>⊂ヽ(^ω^)つ^ω^)つ</p>
-            <button id="logoutBtn">로그아웃</button>
-        `;
-        document.getElementById("logoutBtn").addEventListener("click", () => {
-            localStorage.removeItem("loggedUser");
-            showLoginBox();
-        });
-    } else {
-        loginBox.innerHTML = `
-            <h2>로그인</h2>
-            <input type="text" id="userid" placeholder="test">
-            <input type="password" id="userpw" placeholder="1234">
-            <button id="loginBtn">로그인</button>
-        `;
-        document.getElementById("loginBtn").addEventListener("click", () => {
-            const userid = document.getElementById("userid").value;
-            const userpw = document.getElementById("userpw").value;
-            if (userid === "test" && userpw === "1234") {
-                localStorage.setItem("loggedUser", userid);
-                showLoginBox();
-            } else {
-                alert("아이디 또는 비밀번호가 틀렸습니다.");
-            }
-        });}
-    }
-showLoginBox();
 const logo = document.getElementById('logo');
 logo.addEventListener('click', () => {
     contentBox.innerHTML = `
@@ -391,6 +570,7 @@ logo.addEventListener('click', () => {
         </p>
     `;
 });
+
 const contentBox = document.getElementById('contentBox');
 const menuContent = {
     "최가상회": 
